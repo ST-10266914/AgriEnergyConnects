@@ -1,0 +1,50 @@
+﻿@model FarmerCreateViewModel
+
+@{
+    ViewData["Title"] = "Create Farmer with Account";
+}
+
+<h2>Create Farmer with Login</h2>
+
+<form asp-action="CreateNewWithAccount" method="post">
+    <div class="form-group">
+        <label>Full Name</label>
+        <input asp-for="FullName" class="form-control" required />
+        <span class="text-danger" asp-validation-for="FullName"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Phone Number</label>
+        <input asp-for="PhoneNumber" class="form-control" value="000-000-0000" />
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" required />
+        <span class="text-danger" asp-validation-for="Email"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Location</label>
+        <input asp-for="Location" class="form-control" value="Unknown Location" />
+    </div>
+
+    <div class="form-group">
+        <label>Select User</label>
+        <select asp-for="UserId" asp-items="Model.Users" class="form-control" required>
+            <option value="">-- Select User --</option>
+        </select>
+        <span class="text-danger" asp-validation-for="UserId"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Farmer</button>
+</form>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success mt-3">@TempData["Success"]</div>
+}
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

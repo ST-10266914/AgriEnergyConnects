@@ -1,0 +1,87 @@
+﻿@model FarmerCreateViewModel
+@{
+    ViewData["Title"] = "Create Farmer";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Register New Farmer</h4>
+        </div>
+        <div class="card-body">
+            <form id="farmerForm" method="post">
+                <!-- Hidden field for UserId -->
+                <input type="hidden" id="selectedUserId" name="UserId" />
+
+                <div class="mb-3">
+                    <label for="userDropdown" class="form-label">Select Farmer (User)</label>
+                    <select class="form-select" id="userDropdown">
+                        <option value="">-- Select a user --</option>
+                        @foreach (var user in Model.Users)
+                        {
+                        <option value="@user.Value" data-email="@user.Text"
+                                data-fullname="@user.Text.Split('@')[0]">
+                            @user.Text
+                        </option>
+                        }
+                    </select>
+                    <div class="invalid-feedback" id="userError">Please select a farmer</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input class="form-control bg-light" id="fullName" readonly placeholder="Full name will appear here" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input class="form-control bg-light" id="email" readonly placeholder="Email will appear here" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input class="form-control" id="phone" name="PhoneNumber" placeholder="e.g., 071-234-5678" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input class="form-control" id="location" name="Location" placeholder="Enter farmer location" />
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-success">Create Farmer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const userDropdown = document.getElementById("userDropdown");
+        const fullNameInput = document.getElementById("fullName");
+        const emailInput = document.getElementById("email");
+        const userIdInput = document.getElementById("selectedUserId");
+        const userError = document.getElementById("userError");
+
+        userDropdown.addEventListener("change", function () {
+            const selected = this.options[this.selectedIndex];
+            fullNameInput.value = selected.dataset.fullname || "";
+            emailInput.value = selected.value ? selected.dataset.email : "";
+            userIdInput.value = selected.value;
+
+            if (selected.value) {
+                userDropdown.classList.remove("is-invalid");
+                userError.style.display = "none";
+            }
+        });
+
+        document.getElementById("farmerForm").addEventListener("submit", function (e) {
+            if (!userIdInput.value) {
+                e.preventDefault();
+                userDropdown.classList.add("is-invalid");
+                userError.style.display = "block";
+            }
+        });
+    </script>
+}
