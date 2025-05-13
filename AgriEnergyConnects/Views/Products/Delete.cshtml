@@ -36,7 +36,50 @@
             @Html.DisplayFor(model => model.Farmer.Email)
         </dd>
     </dl>
-    
+    @@model AgriEnergyConnects.Models.Product
+
+@{
+    ViewData["Title"] = "Delete Product";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-danger">
+        <div class="card-header bg-danger text-white">
+            <h3 class="mb-0"><i class="bi bi-exclamation-triangle-fill"></i> Confirm Deletion</h3>
+        </div>
+        <div class="card-body">
+            <p class="lead">Are you sure you want to delete the following product?</p>
+
+            <dl class="row">
+                <dt class="col-sm-3 fw-bold">Product Name:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Name)</dd>
+
+                <dt class="col-sm-3 fw-bold">Category:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Category)</dd>
+
+                <dt class="col-sm-3 fw-bold">Production Date:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.ProductionDate)</dd>
+
+                <dt class="col-sm-3 fw-bold">Farmer Email:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Farmer.Email)</dd>
+            </dl>
+
+            <form asp-action="Delete" method="post" class="mt-4">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left-circle"></i> Cancel
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash-fill"></i> Delete Product
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |

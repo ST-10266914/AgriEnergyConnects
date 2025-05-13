@@ -4,57 +4,78 @@
     ViewData["Title"] = "All Products";
 }
 
-<h2>Products from Farmers</h2>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary"><i class="bi bi-box-seam"></i> Products from Farmers</h2>
+    </div>
 
-<form method="get">
-    <div class="form-row">
-        <div class="form-group col-md-3">
-            <label>Category</label>
-            <select name="category" class="form-control">
-                <option value="">All</option>
-                @foreach (var cat in Model.Categories)
-                {
-                    <option value="@cat" selected="@(cat == Model.Category ? "selected" : null)">
-                        @cat
-                    </option>
-                }
-            </select>
-        </div>
+    <!-- Filter Card -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold">Category</label>
+                    <select name="category" class="form-select">
+                        <option value="">All</option>
+                        @foreach (var cat in Model.Categories)
+                        {
+                            <option value="@cat" selected="@(cat == Model.Category ? "selected" : null)">
+                                @cat
+                            </option>
+                        }
+                    </select>
+                </div>
 
-        <div class="form-group col-md-3">
-            <label>Start Date</label>
-            <input type="date" name="startDate" value="@(Model.StartDate?.ToString("yyyy-MM-dd"))" class="form-control" />
-        </div>
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold">Start Date</label>
+                    <input type="date" name="startDate" value="@(Model.StartDate?.ToString("yyyy-MM-dd"))" class="form-control" />
+                </div>
 
-        <div class="form-group col-md-3">
-            <label>End Date</label>
-            <input type="date" name="endDate" value="@(Model.EndDate?.ToString("yyyy-MM-dd"))" class="form-control" />
-        </div>
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold">End Date</label>
+                    <input type="date" name="endDate" value="@(Model.EndDate?.ToString("yyyy-MM-dd"))" class="form-control" />
+                </div>
 
-        <div class="form-group col-md-3 align-self-end">
-            <button type="submit" class="btn btn-primary">Filter</button>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-outline-primary w-100">
+                        <i class="bi bi-funnel-fill"></i> Filter
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
-</form>
 
-<table class="table table-bordered mt-3">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Production Date</th>
-            <th>Farmer</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var product in Model.Products)
-        {
-            <tr>
-                <td>@product.Name</td>
-                <td>@product.Category</td>
-                <td>@product.ProductionDate.ToString("yyyy/MM/dd")</td>
-                <td>@product.Farmer?.FullName</td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <!-- Product Table -->
+    <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle border">
+            <thead class="table-primary">
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Production Date</th>
+                    <th>Farmer</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Products.Any())
+                {
+                    @foreach (var product in Model.Products)
+                    {
+                        <tr>
+                            <td>@product.Name</td>
+                            <td>@product.Category</td>
+                            <td>@product.ProductionDate.ToString("yyyy/MM/dd")</td>
+                            <td>@product.Farmer?.FullName</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">No products found matching the selected criteria.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
