@@ -4,6 +4,13 @@
     ViewData["Title"] = "All Products";
 }
 
+<style>
+    body {
+        background-color: darkslategray;
+    }
+
+</style>
+
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="text-primary"><i class="bi bi-box-seam"></i> Products from Farmers</h2>
@@ -30,7 +37,7 @@
                     <label class="form-label fw-semibold">Start Date</label>
                     <input type="date" name="startDate" value="@(Model.StartDate?.ToString("yyyy-MM-dd"))" class="form-control" />
                 </div>
-
+                
                 <div class="col-md-3">
                     <label class="form-label fw-semibold">End Date</label>
                     <input type="date" name="endDate" value="@(Model.EndDate?.ToString("yyyy-MM-dd"))" class="form-control" />
@@ -50,10 +57,10 @@
         <table class="table table-hover table-striped align-middle border">
             <thead class="table-primary">
                 <tr>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Production Date</th>
-                    <th>Farmer</th>
+                    <th style="background-color:mediumseagreen">Name</th>
+                    <th style="background-color:mediumseagreen">Category</th>
+                    <th style="background-color:mediumseagreen">Production Date</th>
+                    <th style="background-color:mediumseagreen">Farmer</th>
                 </tr>
             </thead>
             <tbody>

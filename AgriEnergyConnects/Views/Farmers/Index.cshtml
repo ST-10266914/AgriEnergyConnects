@@ -4,12 +4,20 @@
     ViewData["Title"] = "Farmers";
 }
 
+<style>
+    body{
+        background-color:darkslategray;
+    }
+
+</style>
+
+
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="text-primary">
+        <h2 class="text-primary," style="color:white">
             <i class="bi bi-person-lines-fill me-2"></i>Farmers List
         </h2>
-        <a asp-action="Create" class="btn btn-success">
+        <a asp-action="Create" class="btn btn-success,"style="background-color:mediumseagreen">
             <i class="bi bi-plus-circle me-1"></i> Create New Farmer
         </a>
     </div>
@@ -18,12 +26,12 @@
         <table class="table table-hover align-middle shadow-sm border">
             <thead class="table-light">
                 <tr>
-                    <th>@Html.DisplayNameFor(model => model.First().FullName)</th>
-                    <th>@Html.DisplayNameFor(model => model.First().PhoneNumber)</th>
-                    <th>@Html.DisplayNameFor(model => model.First().Email)</th>
-                    <th>@Html.DisplayNameFor(model => model.First().Location)</th>
-                    <th>User Email</th>
-                    <th class="text-end">Actions</th>
+                    <th style="background-color:mediumseagreen">@Html.DisplayNameFor(model => model.First().FullName)</th>
+                    <th style ="background-color:mediumseagreen">@Html.DisplayNameFor(model => model.First().PhoneNumber)</th>
+                    <th style ="background-color:mediumseagreen">@Html.DisplayNameFor(model => model.First().Email)</th>
+                    <th style="background-color:mediumseagreen">@Html.DisplayNameFor(model => model.First().Location)</th>
+                    <th style="background-color:mediumseagreen">User Email</th>
+                    <th class="text-end," style="background-color:mediumseagreen">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,14 +54,14 @@
                         </td>
                         <td class="text-end">
                             <div class="btn-group btn-group-sm" role="group">
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary" title="Edit">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-1" title="View Details">
+                                    <i class="bi bi-eye-fill"></i>
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning me-1" title="Edit">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-secondary" title="Details">
-                                    <i class="bi bi-eye"></i>
-                                </a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger" title="Delete">
-                                    <i class="bi bi-trash"></i>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger" title="Delete">
+                                    <i class="bi bi-trash-fill"></i>
                                 </a>
                             </div>
                         </td>

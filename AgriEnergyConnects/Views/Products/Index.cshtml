@@ -4,9 +4,15 @@
     ViewData["Title"] = "Product List";
 }
 
+<style>
+    body {
+        background-color: darkslategray;
+    }
+</style>
+
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-primary"><i class="bi bi-boxes"></i> Product List</h2>
+        <h2 class="text-primary, "style="color:white"><i class="bi bi-boxes"></i> Product List</h2>
         <a asp-action="Create" class="btn btn-success shadow-sm">
             <i class="bi bi-plus-lg"></i> Create New Product
         </a>
@@ -16,11 +22,11 @@
         <table class="table table-hover table-bordered shadow-sm">
             <thead class="table-primary">
                 <tr class="text-center align-middle">
-                    <th>@Html.DisplayNameFor(model => model.Name)</th>
-                    <th>@Html.DisplayNameFor(model => model.Category)</th>
-                    <th>@Html.DisplayNameFor(model => model.ProductionDate)</th>
-                    <th>@Html.DisplayNameFor(model => model.Farmer)</th>
-                    <th>Actions</th>
+                    <th style="background-color:mediumseagreen">@Html.DisplayNameFor(model => model.Name)</th>
+                    <th style="background-color:mediumseagreen">@Html.DisplayNameFor(model => model.Category)</th>
+                    <th style="background-color:mediumseagreen">@Html.DisplayNameFor(model => model.ProductionDate)</th>
+                    <th style="background-color:mediumseagreen">@Html.DisplayNameFor(model => model.Farmer)</th>
+                    <th style="background-color:mediumseagreen">Actions</th>
                 </tr>
             </thead>
             <tbody>
