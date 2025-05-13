@@ -4,60 +4,76 @@
     ViewData["Title"] = "Your Profile";
 }
 
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["Success"]
-    </div>
-}
+<div class="container mt-4">
 
-<h1>Your Profile</h1>
-<hr />
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
 
-<div class="row">
-    <div class="col-md-6">
-        <h4>Profile Details</h4>
-        <dl class="row">
-            <dt class="col-sm-3">Full Name</dt>
-            <dd class="col-sm-9">@Model.FullName</dd>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-person-circle me-2"></i>Profile Details</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">Full Name</dt>
+                        <dd class="col-sm-8">@Model.FullName</dd>
 
-            <dt class="col-sm-3">Phone Number</dt>
-            <dd class="col-sm-9">@(Model.PhoneNumber ?? "Not provided")</dd>
+                        <dt class="col-sm-4">Phone Number</dt>
+                        <dd class="col-sm-8">@(Model.PhoneNumber ?? "Not provided")</dd>
 
-            <dt class="col-sm-3">Email</dt>
-            <dd class="col-sm-9">@Model.Email</dd>
+                        <dt class="col-sm-4">Email</dt>
+                        <dd class="col-sm-8">@Model.Email</dd>
 
-            <dt class="col-sm-3">Location</dt>
-            <dd class="col-sm-9">@(Model.Location ?? "Not provided")</dd>
-        </dl>
-
-        <h4>Update Profile</h4>
-        <form asp-action="UpdateProfile" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <!-- Hidden fields to keep non-editable data during post -->
-            <input type="hidden" asp-for="FullName" />
-            <input type="hidden" asp-for="Email" />
-
-            <!-- Phone Number -->
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        <dt class="col-sm-4">Location</dt>
+                        <dd class="col-sm-8">@(Model.Location ?? "Not provided")</dd>
+                    </dl>
+                </div>
             </div>
 
-            <!-- Location -->
-            <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
-            </div>
+            <div class="card shadow-sm">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Update Profile</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="UpdateProfile" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-            <div class="form-group mt-4">
-                <input type="submit" value="Save Changes" class="btn btn-primary" />
-                <a asp-action="Profile" class="btn btn-secondary">Cancel</a>
+                        <!-- Hidden fields -->
+                        <input type="hidden" asp-for="FullName" />
+                        <input type="hidden" asp-for="Email" />
+
+                        <div class="mb-3">
+                            <label asp-for="PhoneNumber" class="form-label"></label>
+                            <input asp-for="PhoneNumber" class="form-control" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Location" class="form-label"></label>
+                            <input asp-for="Location" class="form-control" />
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary me-2">
+                                <i class="bi bi-save me-1"></i> Save Changes
+                            </button>
+                            <a asp-action="Profile" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle me-1"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
